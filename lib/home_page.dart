@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -37,9 +38,62 @@ class _HomePageState extends State<HomePage> {
     'images/pexels-leif-bergerson-9843198.jpg',
     'images/pexels-mike-noga-3608542.jpg',
   ];
- Future<void>refreshPage()async {
-  await Future.delayed(const Duration(seconds: 1));  
+
+  List<String> userNames = [
+    'Burna boy',
+    'Justin Bieber',
+    'Rihanna',
+    'Tems',
+    'Cardi B',
+    'Millie',
+    'Fire Boy',
+    'Davido',
+    'images/pexels-dante-juhasz-12964186.jpg',
+    'images/pexels-jay-pizzle-3802508.jpg',
+    'images/pexels-leif-bergerson-9843198.jpg',
+    'images/pexels-mike-noga-3608542.jpg',
+  ];
+
+  sharePostModal() {
+    return SizedBox(
+      height: 200,
+      child: Column(
+        children: [
+          ListTile(
+            leading: const Icon(Icons.share),
+            title: const Text('share On Facebook'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(Icons.share),
+            title: const Text('share On Twitter'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(Icons.share),
+            title: const Text('share On LinkedIn'),
+            onTap: () {},
+          ),
+        ],
+      ),
+    );
   }
+
+  String _backgroundImage = "images/instaBack.jpg";
+  void _changeBackgroundImage() {
+   _backgroundImage = "images/instaview.jpg";
+  }
+
+  Future<void> refreshPage() async {
+    await Future.delayed(const Duration(seconds: 1));
+  }
+
+// Function ShowModalForImage(){
+// return (
+//  showModalBottomSheet(context: , builder: )
+// );
+// }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,9 +104,17 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           IconButton(
-              onPressed: () {}, icon: const Icon(Icons.add_card_outlined, color: Colors.black,)),
+              onPressed: () {},
+              icon: const Icon(
+                Icons.add_card_outlined,
+                color: Colors.black,
+              )),
           IconButton(
-              onPressed: () {}, icon: const Icon(Icons.chat_bubble_outline, color: Colors.black,)),
+              onPressed: () {},
+              icon: const Icon(
+                Icons.chat_bubble_outline,
+                color: Colors.black,
+              )),
         ],
       ),
       body: RefreshIndicator(
@@ -69,19 +131,64 @@ class _HomePageState extends State<HomePage> {
                             padding: const EdgeInsets.all(10),
                             child: Column(
                               children: [
-                                CircleAvatar(
-                                  radius: 35,
-                                  backgroundImage:
-                                      const AssetImage('images/instaBack.jpg'),
+                                GestureDetector(
+                                  onTap: () {
+                                    _changeBackgroundImage;
+                                    showGeneralDialog(
+                                      context: context,
+                                      barrierDismissible: true,
+                                      barrierLabel:
+                                          MaterialLocalizations.of(context)
+                                              .modalBarrierDismissLabel,
+                                      barrierColor: Colors.black45,
+                                      transitionDuration:
+                                          const Duration(milliseconds: 5),
+                                      pageBuilder: (BuildContext buildContext,
+                                          Animation animation,
+                                          Animation secondaryAnimation) {
+                                            Future.delayed(const Duration(seconds: 5), () {
+                                              Navigator.of(context).pop();
+                                            });
+                                        return GestureDetector(
+                                          onTap: () {
+                                            Navigator.of(context).pop();
+                                            // _changeBackgroundImage;
+                                          },
+                                          child: Container(
+                                            width: 800,
+                                            height: 800,
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                image: ExactAssetImage(
+                                                    posts[index]),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: const [
+                                            
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
                                   child: CircleAvatar(
-                                    radius: 32,
+                                    radius: 35,
                                     backgroundImage:
-                                        AssetImage(profileImages[index]),
+                                        AssetImage(_backgroundImage),
+                                    child: CircleAvatar(
+                                      radius: 32,
+                                      backgroundImage:
+                                          AssetImage(profileImages[index]),
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(height: 10),
                                 const Text(
-                                  'Profile Name',
+                                  'profileName',
                                   style: TextStyle(
                                       fontSize: 12, color: Colors.black87),
                                 ),
@@ -103,8 +210,7 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.all(10),
                         child: CircleAvatar(
                           radius: 14,
-                          backgroundImage:
-                              const AssetImage('images/instaBack.jpg'),
+                          backgroundImage: AssetImage(_backgroundImage),
                           child: CircleAvatar(
                             radius: 12,
                             backgroundImage: AssetImage(profileImages[index]),
@@ -114,7 +220,14 @@ class _HomePageState extends State<HomePage> {
                       const Text("Profile Name"),
                       const Spacer(),
                       IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.more_horiz))
+                          onPressed: () {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  sharePostModal(),
+                            );
+                          },
+                          icon: const Icon(Icons.more_horiz))
                     ],
                   ),
                   // image post
@@ -138,7 +251,7 @@ class _HomePageState extends State<HomePage> {
                       icon: const Icon(Icons.bookmark_border),
                     ),
                   ]),
-      
+
                   Container(
                     padding: const EdgeInsets.all(15),
                     child: Column(
