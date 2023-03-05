@@ -167,7 +167,11 @@ class _HomePageState extends State<HomePage> {
                                             child: Column(
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: const [
-                                            
+                                                LinearProgressIndicator(
+                                                  backgroundColor: Colors.grey,
+                                                  color: Colors.white,
+                                                  // animation: true,
+                                                )
                                               ],
                                             ),
                                           ),
