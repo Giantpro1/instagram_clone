@@ -19,7 +19,7 @@ class InstagramClone extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home:const MyHomePage(title: ''),
+      home: const MyHomePage(title: ''),
     );
   }
 }
@@ -34,10 +34,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int currentPage = 0;
+  List<String> profileImages = [
+    'images/burn2.jfif',
+    'images/justin.jfif',
+    'images/riha.jfif',
+    'images/tems.jfif',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: currentPage==1? const SearchPage(): const HomePage(),
+      body: currentPage == 1 ? const SearchPage() : const HomePage(),
       bottomNavigationBar: BottomAppBar(
           child: Row(
         children: [
@@ -58,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
           const Spacer(),
           IconButton(
             onPressed: () {
-                setState(() {
+              setState(() {
                 currentPage = 1;
               });
             },
@@ -72,12 +79,12 @@ class _MyHomePageState extends State<MyHomePage> {
           const Spacer(),
           IconButton(
             onPressed: () {
-                setState(() {
+              setState(() {
                 currentPage = 2;
               });
             },
             icon: Icon(
-              Icons.ondemand_video,
+              Icons.add_box_outlined,
               color: currentPage == 2
                   ? const Color.fromRGBO(203, 23, 101, 1)
                   : const Color.fromRGBO(40, 40, 40, 1),
@@ -86,29 +93,24 @@ class _MyHomePageState extends State<MyHomePage> {
           const Spacer(),
           IconButton(
             onPressed: () {
-                setState(() {
+              setState(() {
                 currentPage = 3;
               });
             },
             icon: Icon(
-              Icons.favorite_border,
+              Icons.ondemand_video_sharp,
               color: currentPage == 3
                   ? const Color.fromRGBO(203, 23, 101, 1)
                   : const Color.fromRGBO(40, 40, 40, 1),
             ),
           ),
           const Spacer(),
-          IconButton(
-            onPressed: () {
-                setState(() {
-                currentPage = 4;
-              });
-            },
-            icon: Icon(
-              Icons.person,
-              color: currentPage == 4
-                  ? const Color.fromRGBO(203, 23, 101, 1)
-                  : const Color.fromRGBO(40, 40, 40, 1),
+          CircleAvatar(
+            // radius: 35,
+            // backgroundImage: AssetImage(_backgroundImage),
+            child: CircleAvatar(
+              radius: 12,
+              backgroundImage: AssetImage(profileImages[0]),
             ),
           ),
           const Spacer(),

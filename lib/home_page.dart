@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
 
   String _backgroundImage = "images/instaBack.jpg";
   void _changeBackgroundImage() {
-   _backgroundImage = "images/instaview.jpg";
+    _backgroundImage = "images/instaview.jpg";
   }
 
   Future<void> refreshPage() async {
@@ -106,13 +106,13 @@ class _HomePageState extends State<HomePage> {
           IconButton(
               onPressed: () {},
               icon: const Icon(
-                Icons.add_card_outlined,
+                Icons.favorite_border_outlined,
                 color: Colors.black,
               )),
           IconButton(
               onPressed: () {},
               icon: const Icon(
-                Icons.chat_bubble_outline,
+                Icons.chat_bubble_outline_rounded,
                 color: Colors.black,
               )),
         ],
@@ -146,9 +146,10 @@ class _HomePageState extends State<HomePage> {
                                       pageBuilder: (BuildContext buildContext,
                                           Animation animation,
                                           Animation secondaryAnimation) {
-                                            Future.delayed(const Duration(seconds: 5), () {
-                                              Navigator.of(context).pop();
-                                            });
+                                        Future.delayed(
+                                            const Duration(seconds: 5), () {
+                                          Navigator.of(context).pop();
+                                        });
                                         return GestureDetector(
                                           onTap: () {
                                             Navigator.of(context).pop();
@@ -164,9 +165,10 @@ class _HomePageState extends State<HomePage> {
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: const [
+                                            child: const Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
                                                 LinearProgressIndicator(
                                                   backgroundColor: Colors.grey,
                                                   color: Colors.white,
