@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/create_post.dart';
 import 'package:instagram_clone/home_page.dart';
+import 'package:instagram_clone/profile_page.dart';
+import 'package:instagram_clone/reel_page.dart';
 import 'package:instagram_clone/search_page.dart';
 
 void main() {
@@ -44,7 +47,17 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: currentPage == 1 ? const SearchPage() : const HomePage(),
+      body: currentPage == 1
+          ? const SearchPage()
+          : currentPage == 0
+              ? const HomePage()
+              : currentPage == 2
+                  ? const CreatePostPage()
+                  : currentPage == 3
+                      ? const Reelpage()
+                      : currentPage == 4 // Case for profile page
+                          ? const ProfilePage() // Replace with your profile page widget
+                          : const HomePage(),
       bottomNavigationBar: BottomAppBar(
           child: Row(
         children: [
@@ -105,12 +118,19 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           const Spacer(),
-          CircleAvatar(
-            // radius: 35,
-            // backgroundImage: AssetImage(_backgroundImage),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                currentPage = 4; // Set currentPage to 4 for profile page
+              });
+            },
             child: CircleAvatar(
-              radius: 12,
-              backgroundImage: AssetImage(profileImages[0]),
+              // radius: 35,
+              // backgroundImage: AssetImage(_backgroundImage),
+              child: CircleAvatar(
+                radius: 12,
+                backgroundImage: AssetImage(profileImages[0]),
+              ),
             ),
           ),
           const Spacer(),
